@@ -1,0 +1,17 @@
+{
+  "name": "taste-mcp",
+  "title": "Taste",
+  "version": "2.0.0",
+  "description": "Expert review for AI agents. On-chain proof of human review.",
+  "repository": "https://github.com/with0utwhy/taste-mcp",
+  "documentationUrl": "https://api.humantaste.app/llms.txt",
+  "transport": {
+    "type": "streamable-http",
+    "endpoint": "https://api.humantaste.app/mcp/"
+  },
+  "authentication": {
+    "required": false,
+    "schemes": []
+  },
+  "tools": "dynamic"
+}
