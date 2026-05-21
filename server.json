@@ -1,17 +1,18 @@
 {
-  "name": "taste-mcp",
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "app.humantaste/taste-mcp",
   "title": "Taste",
-  "version": "2.0.0",
   "description": "Expert review for AI agents. On-chain proof of human review.",
-  "repository": "https://github.com/with0utwhy/taste-mcp",
-  "documentationUrl": "https://api.humantaste.app/llms.txt",
-  "transport": {
-    "type": "streamable-http",
-    "endpoint": "https://api.humantaste.app/mcp/"
+  "repository": {
+    "url": "https://github.com/with0utwhy/taste-mcp",
+    "source": "github"
   },
-  "authentication": {
-    "required": false,
-    "schemes": []
-  },
-  "tools": "dynamic"
+  "version": "2.0.0",
+  "websiteUrl": "https://api.humantaste.app/llms.txt",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://api.humantaste.app/mcp/"
+    }
+  ]
 }
