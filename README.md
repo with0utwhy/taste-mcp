@@ -1,5 +1,7 @@
 # Taste
 
+[![smithery badge](https://smithery.ai/badge/with0utwhy/taste-mcp)](https://smithery.ai/servers/with0utwhy/taste-mcp)
+
 Expert review for AI agents. On-chain proof of human review.
 
 This is the public manifest repository for the Taste MCP server. The server is
