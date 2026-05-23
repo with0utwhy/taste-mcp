@@ -8,10 +8,11 @@ consumed by MCP registries; the server source is maintained privately.
 
 ## what
 
-Pay-per-call human expert evaluation over MCP + x402. Vetted humans review an
+Pay-per-call human work for AI agents over MCP + x402. Vetted humans review an
 AI agent's output across any media (text, images, video, audio, social posts),
-audit reasoning chains, run prepublish safety checks, and gate high-stakes
-actions for human approval. Approved outputs receive a Taste content
+audit reasoning chains, run prepublish safety checks, gate high-stakes actions
+for human approval, and convene curated expert teams for working sessions on
+ideas, problems, or decisions. Approved outputs receive a Taste content
 certificate recorded on Base — any downstream agent can verify the review.
 
 ## connect
@@ -19,9 +20,9 @@ certificate recorded on Base — any downstream agent can verify the review.
 ```
 MCP endpoint:  https://api.humantaste.app/mcp/
 Transport:     Streamable HTTP (MCP 2025-06-18)
-Payment:       x402, USDC on Base mainnet, $1.00 per paid call
+Payment:       x402, USDC on Base mainnet, $1.00–$15.00 per paid call
 Free tools:    list_offerings, list_expert_profiles, get_result, verify_certificate
-Typical wait:  5–30 min after a paid call
+Typical wait:  5–30 min for evaluation calls; up to 24h for a think tank session
 ```
 
 No authentication, no API key. Paid tools answer an unauthenticated call with
@@ -35,20 +36,26 @@ Free (no payment, no session):
 |---|---|
 | `list_offerings` | list offerings, prices, certificate flag, operating-hours state |
 | `list_expert_profiles` | aggregate availability + estimated response time, no PII |
-| `get_result` | poll session status, returns the full deliverable when complete |
+| `get_result` | poll session status by sessionId or order reference code; returns the full deliverable when complete |
 | `verify_certificate` | read-only Taste content certificate lookup on Base, rate-limited 60/min/IP |
 
-Paid ($1.00 each, x402):
+Paid (x402 — USDC on Base):
 
-| Tool | Purpose |
-|---|---|
-| `verify_external_source` | verify whether an external source, project, or claim is trustworthy |
-| `review_content` | review AI-generated content for hallucinations, factual errors, domain mistakes — issues a certificate |
-| `verify_reasoning_chain` | audit a step-by-step reasoning chain for mid-chain errors — issues a certificate |
-| `prepublish_review` | review content for cultural sensitivity, brand safety, derivative risk before publishing — issues a certificate |
-| `predict_audience_reaction` | a human matching a target demographic rates and reacts to content |
-| `arbitrate_dispute` | an impartial human arbiter decides whether a deliverable meets a contract |
-| `request_human_approval` | pause a workflow for explicit human approval before an irreversible action |
+| Tool | Price | Purpose |
+|---|---|---|
+| `verify_external_source` | $1.00 | verify whether an external source, project, or claim is trustworthy |
+| `review_content` | $1.00 | review AI-generated content for hallucinations, factual errors, domain mistakes — issues a certificate |
+| `verify_reasoning_chain` | $1.00 | audit a step-by-step reasoning chain for mid-chain errors — issues a certificate |
+| `prepublish_review` | $1.00 | review content for cultural sensitivity, brand safety, derivative risk before publishing — issues a certificate |
+| `predict_audience_reaction` | $1.00 | a human matching a target demographic rates and reacts to content |
+| `arbitrate_dispute` | $1.00 | an impartial human arbiter decides whether a deliverable meets a contract |
+| `request_human_approval` | $1.00 | pause a workflow for explicit human approval before an irreversible action |
+| `order_think_tank_session_30` | $5.00 | convene a curated team of human experts for a 30-min working session on an idea, problem, or decision; returns synthesized directions (1 free revision turn) |
+| `order_think_tank_session_60` | $15.00 | as above, 60-min session (2 free revision turns) |
+
+Each think tank order returns a `TASTE-XXXX-XXXX-XXXX` reference code. Two
+contextual helper tools — `request_think_tank_revision` and
+`request_illustration_revision` — spend a free revision turn against that code.
 
 The live tool list is authoritative — `server.json` sets `tools: "dynamic"`,
 so MCP clients call `tools/list` against the endpoint for the current surface.
